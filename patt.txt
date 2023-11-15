@@ -1,0 +1,23 @@
+
+patt0 = ['co:KDD', 'au:Adam']
+# co:KDD OR au:Adam
+patt0 = [['co:KDD', 'au:Adam', 'cat:cs.cv']]
+# co:KDD AND au:Adam AND cat:cs.cv
+patt0 = [(['co:KDD', 'au:Adam', 'cat:cs.cv'])]
+# co:KDD AND (au:Adam AND cat:cs.cv)
+patt0 = [['co:KDD', 'au:Adam'], 'cat:cs.cv']
+# co:KDD AND au:Adam OR cat:cs.cv
+patt0 = [(['co:KDD', 'au:Adam']), 'cat:cs.cv']
+# (co:KDD AND au:Adam) OR cat:cs.cv
+patt0 = [['co:KDD'], ('au:Adam', 'cat:cs.cv')]
+# co:KDD AND (au:Adam OR cat:cs.cv)
+
+qs = [(['KDD', 'cs.cv']), (['ICML', 'cs.gl', 'machine']), ['Adam'], ('VDD', 'cs.cv')]
+options = ['co', 'cat', 'co',  'cat', 'ti', 'au', 'co', 'cat']
+
+# (co:KDD AND cat:cs.cv) OR (co:ICML AND cat:cs.gl AND ti:machine) OR au:Adam AND (co:VDD OR cat:cs.cv)
+
+# () tuple: should be like math round bracket 
+# [] list: determind that all q in it are AND operator, but ignore the first level
+# each element of the of the first level of list, the operator detramined based on the type of the previous element
+# if it's list of 2 or more elements then OR if it's one element then it's AND
